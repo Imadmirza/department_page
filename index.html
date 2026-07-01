@@ -63,7 +63,7 @@
 
   /* ── Region dropdown ── */
   .region-dropdown {
-    position: absolute; left: 76px; bottom: 10px;
+    position: absolute; left: 91px; bottom: -179px;
     background: #005BA6; border-radius: 10px;
     min-width: 165px; box-shadow: 0 8px 28px rgba(0,0,0,0.32);
     overflow: hidden; z-index: 200;
@@ -91,7 +91,7 @@
     display: flex; height: 100vh; overflow: hidden;
   }
   .content-grid {
-    display: grid; grid-template-columns: 1fr;
+    display: grid; grid-template-columns: 2fr 0.9fr;
     flex: 1; height: auto; overflow: hidden;
   }
 
@@ -103,7 +103,7 @@
     background: #fff;
   }
   .left-panel::-webkit-scrollbar { width: 4px; }
-  .left-panel::-webkit-scrollbar-thumb { background: #b0ccec; border-radius: 4px; }
+  .left-panel::-webkit-scrollbar-thumb { background: #005BA6; border-radius: 4px; }
 
   /* Search bar — full width, compact */
   .left-topbar {
@@ -160,6 +160,7 @@
 .goals-row{
     padding:0 12px 12px;
     gap:16px;
+
 }
 
 
@@ -192,11 +193,12 @@
 
   .qa-app img,
  .goal-app img {
-  width: 78.62px !important;
-  height: 70.41px !important;
+  width: auto !important;
+  height: 80px !important;
   border-radius: 9.39px;
   object-fit: contain;
   display: block;
+  margin-bottom: 8px;
   }
 
   .tag {
@@ -208,7 +210,10 @@
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
   color: #616161;
-  background: #EDF4FE;
+  background: none !important;
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 
 /* 🔴 Quick Action Apps */
@@ -221,7 +226,7 @@
 .lower-row .lower-card:nth-child(1) .tag,
 .lower-row .lower-card:nth-child(2) .tag,
 .lower-row .lower-card:nth-child(3) .tag {
-  background: #EDF4FE !important;
+  background: none !important;
 }
 
 /* 🟠 IT Help */
@@ -274,7 +279,7 @@
 
 /* 🔹 Goal Apps */
 .goal-app {
-  width: 120px;
+  width: 98%;
   height: 190px;
   background: #fff;
   border-radius: 12px;
@@ -305,7 +310,7 @@
   }
   .lower-card {
     background: #fff; border-radius: var(--card-radius);
-    padding: 14px 14px;
+    padding: 0;
     margin-bottom: 10px;
   }
 
@@ -355,7 +360,7 @@
   .goal-icon svg { width: 24px; height: 24px; fill: #fff; }
   .goal-label {
     font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 800;
-    color: var(--text-dark); text-align: left; white-space: nowrap;
+    color: var(--text-dark); text-align: center; white-space: nowrap;
   }
   .goal-tags { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
 
@@ -397,7 +402,195 @@
   white-space: nowrap;   /* ✅ prevent text breaking */
   }
 
- 
+  /* ─────────── RIGHT PANEL ─────────── */
+  .right-panel {
+    background: #F2F7FE;
+    border-left: 1px solid rgba(0,0,0,0.07);
+    display: flex; flex-direction: column;
+    height: 100vh; overflow-y: auto; overflow-x: hidden;
+  }
+  .right-panel::-webkit-scrollbar { width: 4px; }
+  .right-panel::-webkit-scrollbar-thumb { background: #b0ccec; border-radius: 4px; }
+
+  /* HR Updates title */
+  .hr-section-title {
+    font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text-dark); padding: 14px 16px 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── HR Image Carousel — card-sized ── */
+  .hr-carousel-wrap {
+  position: relative;
+  margin: 0 14px 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 3px 14px rgba(0,48,135,0.12);
+  aspect-ratio: 771 / 504;   /* 🔥 best fix */
+}
+  .hr-track {
+    display: flex; height: 100%;
+    transition: transform 0.6s cubic-bezier(.77,0,.18,1);
+    will-change: transform;
+  }
+  .hr-slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: block;
+
+  background-size: contain;   /* 🔥 change here */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;     /* optional: fills empty space nicely */
+}
+  .hr-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(0,0,0,0.25); backdrop-filter: blur(4px);
+    border: none; color: #fff;
+    width: 28px; height: 28px; border-radius: 50%;
+    font-size: 18px; cursor: pointer; z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s; padding: 0; line-height: 1;
+  }
+  .hr-btn:hover { background: rgba(0,0,0,0.5); }
+  .hr-btn.prev { left: 8px; }
+  .hr-btn.next { right: 8px; }
+  .hr-dots {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 5;
+  }
+  .hr-dot {
+    width: 6px; height: 6px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,0.5);
+    transition: background .3s, transform .3s;
+  }
+  .hr-dot.active { background: #fff; transform: scale(1.35); }
+
+  /* POLICY SECTION */
+.policy-section {
+  padding: 0 14px 16px;
+}
+
+.policy-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 10px 0;
+  color: #231F20;
+}
+
+.policy-header {
+  background: #E7C6DEAD;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.policy-main {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.policy-sub {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.policy-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.policy-icon img {
+  width: 22px;
+}
+
+.policy-body {
+  display: flex;
+  gap: 10px;
+}
+
+.policy-side {
+  display: flex;
+  align-items: center;
+  border-left: 1px dashed #000;
+  padding-left: 6px;
+}
+
+.policy-side span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 10px;
+}
+
+.policy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.policy-card{
+    background:#fff;
+    border:2px solid #d8d8d8;
+    border-radius:16px;
+
+    padding:18px 22px;
+    margin-bottom:4px;
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.policy-doc-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.policy-doc-icon img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+.policy-arrow{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+
+.policy-name {
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.policy-date {
+  font-size: 9px;
+}
+
 
 
 .ess-banner{
@@ -507,31 +700,39 @@
     position: relative;
     z-index: 1;
 }
+ /* ACCORDION */
 
 .collapsible-header{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:flex-start;
     cursor:pointer;
     user-select:none;
+    padding:14px;
+    width:100%;
+    border-bottom:0px solid #ececec;
 }
 
 .collapse-icon{
-    font-size:14px;
+    margin-left:15px;
     transition:transform .3s ease;
+}
+
+.collapsible-header.active .collapse-icon{
+    transform:rotate(180deg);
 }
 
 .collapsible-content{
     overflow:hidden;
-    max-height:3000px;
-    transition:max-height .35s ease;
-    
-
-}
-
-.collapsible-content.collapsed{
     max-height:0;
+    transition:max-height .35s ease;
 }
+
+.collapsible-content.active{
+    max-height:5000px;
+}
+
+
 
 
 
@@ -553,6 +754,95 @@
     .goals-row { flex-wrap: wrap; justify-content: center; }
     .explore-row { flex-wrap: wrap; }
   }
+
+/* =========================================================
+   SIDEBAR PARITY FIXES — ported from landing_page_dev.html
+   ========================================================= */
+
+.sidebar-item.active {
+  position: relative;
+  background: #fff;
+  border-radius: 15px 10px 0px 15px;
+  margin-left: 8px;
+  margin-right: -6px;
+  padding: 6px 8px;
+  z-index: 2;
+}
+
+.sidebar-item.active::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: #19b394;
+  border-radius: 15px 0 0 15px;
+}
+
+.sidebar-item.active img {
+  filter: none;
+}
+
+.sidebar-item.active > div:not(.icon-wrap) a {
+  color: #0055b8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sidebar-item .icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.sidebar-item:not(.active) {
+  font-weight: 500;
+}
+
+/* ── CARD & TYPE FIXES ── */
+
+.goal-label {
+  font-size: 11px;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.policy-name {
+  font-size: 13px;
+}
+
+.goal-app {
+  height: auto;
+  min-height: 150px;
+}
+
+.tag {
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.sidebar-item {
+  font-size: 9px;
+}
+
+.ess-title { font-size: 18px; }
+.ess-subtitle { font-size: 14px; }
+.search-bar-left { height: 42px; }
+.search-bar-left input { font-size: 13px; }
+
+.btn-explore.primary {
+  font-size: 13px;
+  background: #14b495;
+  color: #fff;
+  font-weight: 600;
+}
+.btn-explore.primary:hover {
+  background: #14b495;
+  color: #fff;
+}
+
+.tag { color: rgba(0, 0, 0, 0.8); line-height: 1.4em; margin-bottom:2px; }
 </style>
 </head>
 <body>
@@ -561,11 +851,11 @@
 <nav class="sidebar">
 
 <!-- Home -->
-<div class="sidebar-item active">
+<div class="sidebar-item">
   
   <div class="icon-wrap">
     <a href="https://workzone-prod-w6v2igr4.workzonehr.cfapps.ap10.hana.ondemand.com/site#workzone-home&/home" target="_blank">
-      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/1faa139304f94b208c1f/home.png" alt="Home">
+      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/100f3ecfc44c4646b7dd/blackhomme.png" alt="Home">
     </a>
   </div>
 
@@ -578,11 +868,11 @@
 </div>
 
 <!-- Employee Self-Service -->
-<div class="sidebar-item" style="margin-top:8px;">
+<div class="sidebar-item active" style="margin-top:8px;">
   
   <div class="icon-wrap">
     <a href="https://workzone-prod-w6v2igr4.workzonehr.cfapps.ap10.hana.ondemand.com/site#cipla-ess?sap-app-origin-hint=&sap-ui-app-id-hint=07cf8232-43ea-4503-8271-abc159f70dc2" target="_blank">
-      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/adfd108c0f1144938bad/ess.png" alt="Employee Self-Service">
+      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/fac440de07c24d639f56/blueess.png" alt="Employee Self-Service">
     </a>
   </div>
 
@@ -697,25 +987,117 @@
 
       <div class="lower-row">
 
+
+      <!-- Finance -->
+      <div class="lower-card">
+
+          <div class="lower-card-title collapsible-header">
+              <span>Finance</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
+          </div>
+
+          <div class="collapsible-content">
+
+              <div class="goals-row" style="grid-template-columns: repeat(6, auto);">
+
+                  <div class="goal-app"
+                      onclick="openApp('https://cipla.turbohire.co/e/login')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/96bbae357d754c25aee9/pay.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiRecruiting Turbohire">
+                      <span class="goal-label">MiInvioce Payments</span>
+                      <div class="goal-tags">
+                          <span class="tag blue">Non PO Invoice submission</span>
+                          <span class="tag blue">EAS & A2 (Forex services)</span>
+                      </div>
+                  </div>
+
+                  <div class="goal-app"
+                      onclick="openApp('https://performancemanager10.successfactors.com/sf/recruiting?company=C0001172882P')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/6b03dd82dd57474d876c/WAVE.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiRecruiting ECM">
+                      <span class="goal-label">MiWave</span>
+                      <div class="goal-tags">
+                          <span class="tag pink">Project Eagle</span>
+                          <span class="tag pink">Cost Saving Ideation</span>
+                      </div>
+                  </div>
+
+                  <div class="goal-app"
+                      onclick="openApp('https://cipla.turbohire.co/login')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/f8ec158e71e249bdb44c/ACCOUNTS.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiRecruiting Turbohire">
+                      <span class="goal-label">Cipla Accounting e-Manual </span>
+                      <div class="goal-tags">
+                          <span class="tag blue">Policies</span>
+                          <span class="tag blue">Directives</span>
+                          <span class="tag blue">Press documents</span>
+                      </div>
+                  </div>
+
+                  <div class="goal-app"
+                      onclick="openApp('https://cipla.tydy.co/')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/d1c787d4ad724b7fa4e3/CiplaCODE.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiOnboarding">
+                      <span class="goal-label">Cipla COE Opinions</span>
+                      <div class="goal-tags">
+                          <span class="tag green">Accounting queries</span>
+                          <span class="tag green">Advisory</span>
+                          <span class="tag green">Accounting Repository</span>
+                      </div>
+                  </div>
+
+                  <div class="goal-app"
+                      onclick="openApp('https://performancemanager10.successfactors.com/sf/careers?company=C0001172882P')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/327450c23f4c4f8a8836/Delegation.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiCareers">
+                      <span class="goal-label">Delegation of Authority</span>
+                      <div class="goal-tags">
+                          <span class="tag teal">Delegation</span>
+                          <span class="tag teal">Approvals</span>
+                          <span class="tag teal">Workflow</span>
+                      </div>
+                  </div>
+
+                  <div class="goal-app"
+                      onclick="openApp('https://performancemanager10.successfactors.com/sf/careers?company=C0001172882P')">
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/4a403049999e408d867c/Audit.png"
+                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
+                          alt="MiCareers">
+                      <span class="goal-label">Audit Management Tool</span>
+                      <div class="goal-tags">
+                          <span class="tag teal">Streamlined auditing</span>
+                      </div>
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
         
 
       <!-- Admin -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('peopleOrgSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>Admin</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="peopleOrgSection" class="collapsible-content">
+          <div class="collapsible-content collapsed">
 
-              <div class="goals-row" style="grid-template-columns: repeat(6, auto);">
+              <div class="goals-row" style="grid-template-columns: repeat(6, 15.66%);">
 
                   <div class="goal-app"
                       data-search="Annual Assesment, 180 feedback, LeadX"
                       onclick="openApp('https://performancemanager10.successfactors.com/sf/pmreviews?bplte_company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/2362c3d32de346f9a2de/Performance.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/2e0239f916e449708b96/MiAdminFacilityy.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Performance">
                       <span class="goal-label">MiAdminFacility</span>
@@ -802,19 +1184,18 @@
       <!-- IT -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('learningSection', this)">
+          <div class="lower-card-title collapsible-header colla collapsed">
               <span>IT</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="learningSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(3, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://ciplalimit.plateau.com/learning/user/personal/landOnPortalHome.do?OWASP_CSRFTOKEN=8VK6-8FPG-Q5TC-68RB-RYDK-XEGE-WSEE-XMBV&fromSF=Y&fromDeepLink=true&pageID=')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/429c210f337d481099ea/MiLearninG.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/b55475943fb74a36996a/ITHelpdesk1.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="MiLearning">
                       <span class="goal-label">Mi-IT Helpdesk</span>
@@ -852,115 +1233,23 @@
 
       </div>
 
-      <!-- Finance -->
-      <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('careersSection', this)">
-              <span>Finance</span>
-              <span class="collapse-icon">⌃</span>
-          </div>
-
-          <div id="careersSection" class="collapsible-content">
-
-              <div class="goals-row" style="grid-template-columns: repeat(6, auto);">
-
-                  <div class="goal-app"
-                      onclick="openApp('https://cipla.turbohire.co/e/login')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/743a4c95ad7446d5bd85/MiRecruitingTurbohire.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiRecruiting Turbohire">
-                      <span class="goal-label">MiInvioce Payments</span>
-                      <div class="goal-tags">
-                          <span class="tag blue">Non PO Invoice submission</span>
-                          <span class="tag blue">EAS & A2 (Forex services)</span>
-                      </div>
-                  </div>
-
-                  <div class="goal-app"
-                      onclick="openApp('https://performancemanager10.successfactors.com/sf/recruiting?company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/1ce663aff19445d4aa7d/MiRecruitingRCM.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiRecruiting ECM">
-                      <span class="goal-label">MiWave</span>
-                      <div class="goal-tags">
-                          <span class="tag pink">Project Eagle</span>
-                          <span class="tag pink">Cost Saving Ideation</span>
-                      </div>
-                  </div>
-
-                  <div class="goal-app"
-                      onclick="openApp('https://cipla.turbohire.co/login')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/743a4c95ad7446d5bd85/MiRecruitingTurbohire.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiRecruiting Turbohire">
-                      <span class="goal-label">Cipla Accounting e-Manual </span>
-                      <div class="goal-tags">
-                          <span class="tag blue">Policies</span>
-                          <span class="tag blue">Directives</span>
-                          <span class="tag blue">Press documents</span>
-                      </div>
-                  </div>
-
-                  <div class="goal-app"
-                      onclick="openApp('https://cipla.tydy.co/')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/1919fc730a024289a62f/MiOnboarding.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiOnboarding">
-                      <span class="goal-label">Cipla COE Opinions</span>
-                      <div class="goal-tags">
-                          <span class="tag green">Accounting queries</span>
-                          <span class="tag green">Advisory</span>
-                          <span class="tag green">Accounting Repository</span>
-                      </div>
-                  </div>
-
-                  <div class="goal-app"
-                      onclick="openApp('https://performancemanager10.successfactors.com/sf/careers?company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/560bcc98dd034c1ca707/MiCareers.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiCareers">
-                      <span class="goal-label">Delegation of Authority</span>
-                      <div class="goal-tags">
-                          <span class="tag teal">Delegation</span>
-                          <span class="tag teal">Approvals</span>
-                          <span class="tag teal">Workflow</span>
-                      </div>
-                  </div>
-
-                  <div class="goal-app"
-                      onclick="openApp('https://performancemanager10.successfactors.com/sf/careers?company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/560bcc98dd034c1ca707/MiCareers.png"
-                          style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
-                          alt="MiCareers">
-                      <span class="goal-label">Audit Management Tool</span>
-                      <div class="goal-tags">
-                          <span class="tag teal">Streamlined auditing</span>
-                      </div>
-                  </div>
-
-              </div>
-
-          </div>
-
-      </div>
       
       <!-- Analytics -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('careThriveSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>Analytics</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="careThriveSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(4, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://mivolunteering.cipla.com/volunteer_events.aspx')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/1c152036ff1146f2a5ab/MiVolunteering.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/707938bc02794646883c/INSIGHTS.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Volunteering">
                       <span class="goal-label">Global Insights</span>
@@ -975,7 +1264,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://cipla.thanks.com/app/login/sso')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/6e1a819f603443c1a12f/MiRecognition.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/e5e865bb9e2140bc8917/Global.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Recognition">
                       <span class="goal-label">Global tracker</span>
@@ -986,7 +1275,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://www.amahahealth.com/auth/sso/?redirectPage=log-in')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/df6d41736c4b47a49ea1/MiWellbeing.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7a20eac6621746fbb60d/FULCRUMM.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Wellbeing">
                       <span class="goal-label">FULCRUM</span>
@@ -999,7 +1288,7 @@
 
                   <div class="goal-app"
                           onclick="openApp('https://www.amahahealth.com/auth/sso/?redirectPage=log-in')">
-                          <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/df6d41736c4b47a49ea1/MiWellbeing.png"
+                          <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/832e11ca79f4425094e9/genei.png"
                               style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                               alt="Mi Wellbeing">
                           <span class="goal-label">Cipla Genie</span>
@@ -1020,19 +1309,18 @@
       <!-- India Business -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('financialSupportSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>India Business</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="financialSupportSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(5, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://app.refyne.co.in/#/loginRegister?authType=PHONE&tncType=EXPLICIT&referral=DISABLED')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/cf354e2d179d440ca54d/MiEarnedSalary.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/0509fce2802f45648d57/insightsss.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Earned Salary">
                       <span class="goal-label">India insights</span>
@@ -1046,7 +1334,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://jam10.sapjam.com/groups/VW0rKyORKawv8Aa6z6huMS/overview_page/H9LZzlWGLdYJhLUZJxSPfM')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7a1509dbf49c4910adc0/BankingSolutions.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/8bda652c6c0644e3a2c3/Digi.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Banking Solutions">
                       <span class="goal-label">DigiCoach</span>
@@ -1059,7 +1347,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://performancemanager10.successfactors.com/sf/liveprofile?mdfBlock=SEPARATION_UI1&bplte_company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7de47eba806b4820ba7d/MiSeparation.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c0726901c72848bb86f3/CipFlashhh.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Separation">
                       <span class="goal-label">CipFlash</span>
@@ -1074,7 +1362,7 @@
                   <div class="goal-app"
                       data-search="IT tickets"
                       onclick="openApp('https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcipla.m42cloud.com%2Fwm%2F&data=05%7C01%7Cabdeali.nalwala%40Cipla.com%7C4e0131ecbaa944908e6e08db0e5f2b2a%7Ce6fd9f9f6c494254b8e890fba073cceb%7C0%7C0%7C638119574123239089%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=r1gVD3CIDutG07%2B8yQQAJasqWMQLXoZ75XTmTNJO%2B8M%3D&reserved=0')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/e55c7bf636a14b3e8f2d/ITHelpdesk.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/488640445a7d45bbaed4/Hos.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="IT Helpdesk">
                       <span class="goal-label">HospiRise</span>
@@ -1088,7 +1376,7 @@
                   <div class="goal-app"
                       data-search="IT tickets"
                       onclick="openApp('https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcipla.m42cloud.com%2Fwm%2F&data=05%7C01%7Cabdeali.nalwala%40Cipla.com%7C4e0131ecbaa944908e6e08db0e5f2b2a%7Ce6fd9f9f6c494254b8e890fba073cceb%7C0%7C0%7C638119574123239089%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=r1gVD3CIDutG07%2B8yQQAJasqWMQLXoZ75XTmTNJO%2B8M%3D&reserved=0')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/e55c7bf636a14b3e8f2d/ITHelpdesk.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/02fcc21c384140588e5a/online.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="IT Helpdesk">
                       <span class="goal-label">Insight Online</span>
@@ -1106,19 +1394,18 @@
       <!-- IPD -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('hrToolsSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>IPD</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="hrToolsSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(5, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://jecentral.cipla.com/')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/13adc38cfb724e90b92e/JECentral.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/e999a225dc9347ec9696/IPDD.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="JE Central">
                       <span class="goal-label">IPD</span>
@@ -1184,19 +1471,18 @@
       <!-- EHS -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('financialSupportSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>EHS</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="financialSupportSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(4, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://app.refyne.co.in/#/loginRegister?authType=PHONE&tncType=EXPLICIT&referral=DISABLED')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/cf354e2d179d440ca54d/MiEarnedSalary.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c7180a7c09d4469b86d9/PSLabsss.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Earned Salary">
                       <span class="goal-label">PS Labs</span>
@@ -1208,7 +1494,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://jam10.sapjam.com/groups/VW0rKyORKawv8Aa6z6huMS/overview_page/H9LZzlWGLdYJhLUZJxSPfM')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7a1509dbf49c4910adc0/BankingSolutions.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/a899cc9bcd164f1dbb37/EHSLibraryyy.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Banking Solutions">
                       <span class="goal-label">EHS & S Library</span>
@@ -1222,7 +1508,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://performancemanager10.successfactors.com/sf/liveprofile?mdfBlock=SEPARATION_UI1&bplte_company=C0001172882P')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7de47eba806b4820ba7d/MiSeparation.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/4b3273cc75cc4b8b8c6c/chemwatchhh.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Separation">
                       <span class="goal-label">Chemwatch</span>
@@ -1235,7 +1521,7 @@
                   <div class="goal-app"
                       data-search="IT tickets"
                       onclick="openApp('https://apc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcipla.m42cloud.com%2Fwm%2F&data=05%7C01%7Cabdeali.nalwala%40Cipla.com%7C4e0131ecbaa944908e6e08db0e5f2b2a%7Ce6fd9f9f6c494254b8e890fba073cceb%7C0%7C0%7C638119574123239089%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=r1gVD3CIDutG07%2B8yQQAJasqWMQLXoZ75XTmTNJO%2B8M%3D&reserved=0')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/e55c7bf636a14b3e8f2d/ITHelpdesk.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/37a04c2128704873920a/BenchmarkGensuiteee.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="IT Helpdesk">
                       <span class="goal-label">Benchmark Gensuite</span>
@@ -1258,19 +1544,18 @@
       <!-- Engineering -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('financialSupportSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>Engineering</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="financialSupportSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(4, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://app.refyne.co.in/#/loginRegister?authType=PHONE&tncType=EXPLICIT&referral=DISABLED')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/cf354e2d179d440ca54d/MiEarnedSalary.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/eca0b6edc6f34013985f/EngineeringProjectManagementt.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Earned Salary">
                       <span class="goal-label">Engineering & Projects</span>
@@ -1282,7 +1567,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://jam10.sapjam.com/groups/VW0rKyORKawv8Aa6z6huMS/overview_page/H9LZzlWGLdYJhLUZJxSPfM')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7a1509dbf49c4910adc0/BankingSolutions.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c9af312a803b43ed902f/Site24x77.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Banking Solutions">
                       <span class="goal-label">Site 24X7 IT/OT Monitoring </span>
@@ -1308,19 +1593,18 @@
       <!-- Preclinical & Toxicology -->
       <div class="lower-card">
 
-          <div class="lower-card-title collapsible-header"
-              onclick="toggleSection('financialSupportSection', this)">
+          <div class="lower-card-title collapsible-header">
               <span>Preclinical & Toxicology</span>
-              <span class="collapse-icon">⌃</span>
+              <span class="collapse-icon"><img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/5082bd24ba5c42748d7a/accordionicon.png" width="20"></span>
           </div>
 
-          <div id="financialSupportSection" class="collapsible-content">
+          <div class="collapsible-content">
 
               <div class="goals-row" style="grid-template-columns: repeat(4, auto);">
 
                   <div class="goal-app"
                       onclick="openApp('https://app.refyne.co.in/#/loginRegister?authType=PHONE&tncType=EXPLICIT&referral=DISABLED')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/cf354e2d179d440ca54d/MiEarnedSalary.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/101bbd9e6c0f4b8d925e/PreclinicaToxocologyTracker.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Mi Earned Salary">
                       <span class="goal-label">Preclinical & Toxicology Tracker</span>
@@ -1334,7 +1618,7 @@
 
                   <div class="goal-app"
                       onclick="openApp('https://jam10.sapjam.com/groups/VW0rKyORKawv8Aa6z6huMS/overview_page/H9LZzlWGLdYJhLUZJxSPfM')">
-                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/7a1509dbf49c4910adc0/BankingSolutions.png"
+                      <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/b23e0b536a4349479091/HBEL0Repository.png"
                           style="width:50px;height:50px;object-fit:contain;cursor:pointer;flex-shrink:0;"
                           alt="Banking Solutions">
                       <span class="goal-label">HBEL Repository</span>
@@ -1372,10 +1656,97 @@
 
     </div><!-- end left-panel -->
 
+    <!-- ════════ RIGHT PANEL — HR Updates Image Carousel ════════ -->
+    <div class="right-panel">
 
 
 
-</div>
+      <!-- ✅ POLICY SECTION START -->
+      <div class="policy-section">
+
+        <div class="policy-title">Policy Document Updates</div>
+
+        <!-- Header -->
+        <div class="policy-header" onclick="openApp('https://workzone-prod-w6v2igr4.workzonehr.cfapps.ap10.hana.ondemand.com/site#workzone-viewAll?sap-app-origin-hint=&/groups/ZH6Bk7yyFsTC7QtqY6J024/workpage_tabs/ES7lhq0fypRxKa7yELQ024')">
+          <div>
+            <div class="policy-main">MiPolicies</div>
+            <div class="policy-sub">Show All Policies >></div>
+          </div>
+
+          <div class="policy-icon">
+            <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c1bf6fafa22e42a9979d/mipolicies_nnew.png">
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="policy-body">
+
+          <!-- Vertical label -->
+          <div class="policy-side">
+            <span>Recent Updates</span>
+          </div>
+
+          <!-- Cards -->
+          <div class="policy-list">
+
+    <div class="policy-card" onclick="openApp('https://workzone-prod-w6v2igr4.workzonehr.cfapps.ap10.hana.ondemand.com/site#workzone-viewAll?sap-app-origin-hint=&/groups/ZH6Bk7yyFsTC7QtqY6J024/documents/JVeyxQOnbEgdOWSFeGt024/slide_viewer')">
+
+        <div class="policy-doc-icon">
+            <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c1bf6fafa22e42a9979d/mipolicies_nnew.png" alt="doc">
+        </div>
+
+        <div class="policy-content">
+            <div class="policy-name">Domestic Travel Policy</div>
+        </div>
+
+        <div class="policy-arrow">
+            <svg width="12" height="20" viewBox="0 0 12 20">
+                <path d="M2 2L10 10L2 18"
+                      fill="none"
+                      stroke="#A9A9A9"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+    </div>
+
+    <div class="policy-card" onclick="openApp('https://workzone-prod-w6v2igr4.workzonehr.cfapps.ap10.hana.ondemand.com/site#workzone-viewAll?sap-app-origin-hint=&/groups/ZH6Bk7yyFsTC7QtqY6J024/documents/vuI0pZQuCCPpgScTD4Z024/slide_viewer')">
+
+        <div class="policy-doc-icon">
+            <img src="https://dmscdn.successfactors.com/e67bac61f74a3e78a20b20c3bff5abd417dd0605df72755f101e24743407f67c/static_content/c1bf6fafa22e42a9979d/mipolicies_nnew.png" alt="doc">
+        </div>
+
+        <div class="policy-content">
+            <div class="policy-name">International Travel Policy</div>
+        </div>
+
+        <div class="policy-arrow">
+            <svg width="12" height="20" viewBox="0 0 12 20">
+                <path d="M2 2L10 10L2 18"
+                      fill="none"
+                      stroke="#A9A9A9"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+    </div>
+
+          </div>
+        </div>
+
+      </div>
+      <!-- ✅ POLICY SECTION END -->
+
+    </div><!-- end right-panel -->
+
+
+
+
+  </div>
 </div>
 
 <script>
@@ -1473,7 +1844,33 @@
     { name:"People Analytics", tags:["Dashboards","HR Analytics"], onclick:"openApp('https://insights.cipla.com/')" },
     { name:"Talent Central", tags:["Talent Review","Development Review"], onclick:"openApp('https://talentcentral.cipla.com')" },
     { name:"ER Case Management", tags:["Track employee relation"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/EthicsCaseTracker')" },
-    { name:"Policy Review", tags:["Policy review mechanism"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/policyreview')" }
+    { name:"Policy Review", tags:["Policy review mechanism"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/policyreview')" },
+    { name:"MiAdminFacility", tags:["Facility management","Canteen","Transport","Security","Space management","Stationary","Telecom","Real estate"], onclick:"openApp('https://jam10.sapjam.com/groups/AeGmOtLlwCiWttRk8fWFac/overview_page/vwsHJ4UamxVBVewlk5epp8')" },
+    { name:"Mi-IT Helpdesk", tags:["iService","IT Helpdesk"], onclick:"openApp('https://cipla.m42cloud.com/wm/')" },
+    { name:"MiInvoice Payments", tags:["Non PO Invoice submission","EAS & A2","Forex services"], onclick:"openApp('https://jam10.sapjam.com/groups/PduMAvRvGch3lVPVxEbXQp/overview_page/Ip2M5HljMvYzXfYUlxZAnD')" },
+    { name:"MiWave", tags:["Project Eagle","Cost Saving Ideation"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/Wave/MiWave/SitePages/Application-Home-Page.aspx')" },
+    { name:"Cipla Accounting e-Manual", tags:["Policies","Directives","Press documents"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/CiplaAccountingManuals/SitePages/home.aspx')" },
+    { name:"Cipla COE Opinions", tags:["Accounting queries","Advisory","Accounting Repository"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/CiplaSp/CoE/Opinion/Pages/default.aspx#/allQueries')" },
+    { name:"Delegation of Authority", tags:["Delegation","Approvals","Workflow"], onclick:"openApp('https://cipla-doa-prd-kjmbq3o0.launchpad.cfapps.ap10.hana.ondemand.com')" },
+    { name:"Audit Management Tool", tags:["Streamlined auditing"], onclick:"openApp('http://cipla-audittool-prd.cipla.com/login.aspx')" },
+    { name:"Global Insights", tags:["Sales","People process","Financials","Supply Chain","IPD & Operations"], onclick:"openApp('https://insights.cipla.com/')" },
+    { name:"Global Tracker", tags:["Shared Goal Reviews","SGR"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/GlobalTracker')" },
+    { name:"FULCRUM", tags:["Equipment","Product","Process"], onclick:"openApp('https://incmatlabapp1.cipla.com:9988/webapps/home/')" },
+    { name:"Cipla Genie", tags:["AI dashboards","Document tools","Stats-Analyser","LSS assistant","Chatbot","Q&A"], onclick:"openApp('https://ciplagenie.azurewebsites.net/chat')" },
+    { name:"India Insights", tags:["Sales dashboard","Primary Sales","Secondary Sales","Stockists"], onclick:"openApp('https://indiainsights.cipla.com/')" },
+    { name:"DigiCoach", tags:["Personalised Coach","Field force","Real time performance tracking"], onclick:"openApp('https://cipla-xlign.xogoweb.com/loginsso')" },
+    { name:"CipFlash", tags:["Live Sales report","Brand level","SKU level","HQ level"], onclick:"openApp('https://cipflash.cipla.com/')" },
+    { name:"HospiRise", tags:["Hospital productivity","Brand level","Doctor level"], onclick:"openApp('https://app.powerbi.com/links/tktc2hKqZe?ctid=e6fd9f9f-6c49-4254-b8e8-90fba073cceb&pbi_source=linkShare')" },
+    { name:"Insight Online", tags:["Primary Sales","Dashboard","Business Intelligence"], onclick:"openApp('https://insightsonlinebi.cipla.com/report/Primary-Sales/Primary-Summary-Dashboard')" },
+    { name:"IPD", tags:["Innovation platform","Idea Generation"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/Cipnnova/SitePages/ApplicationHome.aspx')" },
+    { name:"PS Labs", tags:["Process Safety","Lab tracking"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/pslabs')" },
+    { name:"EHS & S Library", tags:["Environment","Health","Safety","Sustainability"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/CiplaSp/EHS/Pages/HomeV3.aspx')" },
+    { name:"Chemwatch", tags:["Material Safety","Data Sheet"], onclick:"openApp('https://jr.chemwatch.net/chemwatch.web/account/autologin')" },
+    { name:"Benchmark Gensuite", tags:["EHS Observation","Incident Reporting","Audit"], onclick:"openApp('https://cipla.benchmarkdigital.com')" },
+    { name:"Engineering & Projects", tags:["Document","Repository"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/ENGDocsRepo/SitePages/ENPHome.aspx')" },
+    { name:"Site 24X7 IT/OT Monitoring", tags:["Operational Technology","Server","Network","Application"], onclick:"openApp('https://www.site24x7.in')" },
+    { name:"Preclinical & Toxicology Tracker", tags:["Reports","Assessments","Justifications","Studies"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/toxandstudytracker/SitePages/MyRequestsDashboard.aspx')" },
+    { name:"HBEL Repository", tags:["Health Based Exposure Limit","Report","Database","PDE/OEL"], onclick:"openApp('https://ciplaltd.sharepoint.com/sites/HBELRepository/SitePages/MyRequestsDashboard.aspx')" },
   ];
 
 
@@ -1489,6 +1886,25 @@
         icon.style.transform = 'rotate(0deg)';
     }
   }
+
+  function toggleSection(sectionId, header){
+
+    const section =
+        document.getElementById(sectionId);
+
+    if(section.classList.contains('collapsed')){
+
+        section.classList.remove('collapsed');
+        section.classList.add('open');
+        header.classList.add('active');
+
+    }else{
+
+        section.classList.add('collapsed');
+        section.classList.remove('open');
+        header.classList.remove('active');
+    }
+}
 
 
   /* ───────── SEARCH LOGIC ───────── */
@@ -1617,5 +2033,52 @@
   });
 
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+
+    const sections =
+        document.querySelectorAll('.lower-card');
+
+    sections.forEach((section, index) => {
+
+        const header =
+            section.querySelector('.collapsible-header');
+
+        const content =
+            section.querySelector('.collapsible-content');
+
+        // first section open
+        if(index === 0){
+            header.classList.add('active');
+            content.classList.add('active');
+            content.style.maxHeight =
+                content.scrollHeight + 'px';
+        }
+
+        header.addEventListener('click', function(){
+
+            const isOpen =
+                content.classList.contains('active');
+
+            if(isOpen){
+
+                content.classList.remove('active');
+                header.classList.remove('active');
+                content.style.maxHeight = null;
+
+            }else{
+
+                content.classList.add('active');
+                header.classList.add('active');
+                content.style.maxHeight =
+                    content.scrollHeight + 'px';
+            }
+        });
+
+    });
+
+});
+</script>
+
 </body>
 </html>
